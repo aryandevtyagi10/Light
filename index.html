@@ -2,27 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>IPL Ticket Re-Seller</title>
+  <title>Sell Your IPL Ticket</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>IPL Ticket Re-Seller</h1>
+    <h1>Sell Your IPL Ticket</h1>
     <nav>
-      <a href="#">Home</a>
-      <a href="#">Sell Ticket</a>
-      <a href="#">Buy Ticket</a>
-      <a href="#">Contact</a>
+      <a href="index.html">Home</a>
+      <a href="sell.html">Sell Ticket</a>
     </nav>
   </header>
 
-  <section id="tickets">
-    <h2>Available Tickets</h2>
-    <div class="ticket-list" id="ticketList">
-      <!-- Tickets will be rendered here -->
-    </div>
+  <section>
+    <form id="sellForm">
+      <label>Match Name:</label>
+      <input type="text" name="match" required>
+
+      <label>Date:</label>
+      <input type="date" name="date" required>
+
+      <label>Stadium:</label>
+      <input type="text" name="stadium" required>
+
+      <label>Price (₹):</label>
+      <input type="number" name="price" required>
+
+      <label>Seat Info:</label>
+      <input type="text" name="seat" required>
+
+      <button type="submit">List Ticket</button>
+    </form>
   </section>
 
-  <script src="script.js"></script>
+  <script>
+    const form = document.getElementById('sellForm');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const data = new FormData(form);
+      const ticket = {
+        match: data.get('match'),
+        date: data.get('date'),
+        stadium: data.get('stadium'),
+        price: `₹${data.get('price')}`,
+        seat: data.get('seat'),
+      };
+      console.log('Ticket listed:', ticket);
+      alert("Your ticket has been listed!");
+      form.reset();
+    });
+  </script>
 </body>
 </html>
